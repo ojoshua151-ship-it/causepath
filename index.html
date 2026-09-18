@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CausePath — Find where your skills matter most</title>
+<meta name="description" content="CausePath matches your skills and interests to volunteer causes that need them, then points you to real opportunities near you.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="CausePath — Find where your skills matter most">
+<meta property="og:description" content="Match your skills and interests to real volunteer causes that need them. Built for NextStep Hacks 2026.">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CausePath — Find where your skills matter most">
+<meta name="twitter:description" content="Match your skills and interests to real volunteer causes that need them. Built for NextStep Hacks 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0f766e;
+    --teal-dark: #0b5c56;
+    --coral: #f97316;
+    --coral-dark: #d9660c;
+    --mint: #f2faf8;
+    --white: #ffffff;
+    --ink: #163934;
+    --text-soft: #4d6b66;
+    --line: rgba(15,118,110,0.15);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--mint);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  a { color: inherit; }
+
+  /* ---- Nav ---- */
+
+  .nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 32px;
+  }
+
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--teal-dark);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .logo-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .brand span { color: var(--coral); }
+
+  .nav-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--ink);
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 2px solid var(--teal-dark);
+    letter-spacing: 0.01em;
+  }
+
+  /* ---- Hero ---- */
+
+  .hero {
+    text-align: center;
+    padding: 64px 32px 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before,
+  .hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  .hero::before {
+    width: 220px;
+    height: 220px;
+    background: var(--teal);
+    top: -80px;
+    left: -60px;
+  }
+
+  .hero::after {
+    width: 160px;
+    height: 160px;
+    background: var(--coral);
+    top: 20px;
+    right: -40px;
+    opacity: 0.25;
+  }
+
+  .hero h1, .hero p { position: relative; z-index: 1; }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--teal-dark);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-soft);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ---- Stat band ---- */
+
+  .stat-band {
+    background: linear-gradient(160deg, var(--ink) 0%, var(--teal-dark) 100%);
+    color: var(--white);
+    padding: 56px 32px;
+  }
+
+  .stat-inner {
+    max-width: 640px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 3.4rem;
+    color: var(--coral);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .stat-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(242,250,248,0.9);
+    margin: 0 0 16px 0;
+  }
+
+  .stat-source {
+    font-size: 0.8rem;
+    color: rgba(242,250,248,0.55);
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  .stat-followup {
+    font-size: 0.95rem;
+    color: var(--coral);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* ---- Form ---- */
+
+  .form-wrap {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 36px;
+    margin: 32px auto 60px auto;
+    max-width: 760px;
+    box-shadow: 0 12px 32px rgba(15,118,110,0.08);
+  }
+
+  .form-section {
+    margin-bottom: 28px;
+  }
+
+  .form-section h3 {
+    font-size: 1.05rem;
+    color: var(--teal-dark);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--white);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .form-section .hint {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+  }
+
+  .chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .chip {
+    position: relative;
+  }
+
+  .chip input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .chip label {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--mint);
+    font-size: 0.88rem;
+    color: var(--ink);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+  }
+
+  .chip input:checked + label {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: var(--white);
+  }
+
+  .chip input:focus-visible + label {
+    outline: 2px solid var(--coral);
+    outline-offset: 2px;
+  }
+
+  .radio-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .field label.field-label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--teal-dark);
+  }
+
+  .field input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--mint);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .field input:focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 1px;
+  }
+
+  .btn-match {
+    width: 100%;
+    background: var(--coral);
+    color: var(--white);
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    box-shadow: 0 6px 16px rgba(249,115,22,0.25);
+  }
+
+  .btn-match:hover {
+    background: var(--coral-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(249,115,22,0.32);
+  }
+
+  .btn-match:active { transform: translateY(0); }
+
+  .form-error {
+    color: var(--coral-dark);
+    font-size: 0.88rem;
+    margin-top: 10px;
+    text-align: center;
+    min-height: 18px;
+  }
+
+  /* ---- Results ---- */
+
+  .results {
+    max-width: 760px;
+    margin: 0 auto 80px auto;
+    padding: 0 32px;
+    display: none;
+  }
+
+  .results.visible { display: block; }
+
+  .results-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-reset {
+    background: var(--white);
+    border: 1px solid var(--line);
+    color: var(--teal-dark);
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn-reset:hover { background: var(--mint); }
+
+  .results h2 {
+    font-size: 1.5rem;
+    color: var(--teal-dark);
+    margin-bottom: 6px;
+  }
+
+  .results .results-sub {
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    margin: 0;
+  }
+
+  .match-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--teal);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    animation: fadeInUp 0.4s ease backwards;
+  }
+
+  .match-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15,118,110,0.12);
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .match-card { animation: none; }
+  }
+
+  .match-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+
+  .match-head h3 {
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  .match-score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .score-ring {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+  }
+
+  .score-ring svg { transform: rotate(-90deg); }
+
+  .score-ring .ring-bg {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 4;
+  }
+
+  .score-ring .ring-fill {
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s ease;
+  }
+
+  .score-ring text {
+    transform: rotate(90deg);
+    transform-origin: center;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    fill: var(--teal-dark);
+  }
+
+  .match-card p.why {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-soft);
+    margin: 0 0 14px 0;
+  }
+
+  .match-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .badge {
+    font-size: 0.76rem;
+    background: rgba(15,118,110,0.1);
+    color: var(--teal-dark);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .badge.coral {
+    background: rgba(249,115,22,0.12);
+    color: var(--coral-dark);
+  }
+
+  .btn-find {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .btn-find:hover { background: var(--teal-dark); }
+
+  .loading-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 50px 32px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .loading-state.visible { display: flex; }
+
+  .loading-state p {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--line);
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinner { animation-duration: 2s; }
+  }
+
+  .no-results {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 40px 20px;
+  }
+
+  .how-it-works {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 700px) {
+    .how-it-works { grid-template-columns: 1fr; }
+  }
+
+  .how-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 32px;
+  }
+
+  .how-card h3 {
+    font-size: 1.1rem;
+    color: var(--teal-dark);
+    margin-bottom: 12px;
+  }
+
+  .how-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-soft);
+    margin: 0 0 10px 0;
+  }
+
+  .how-card p:last-child { margin-bottom: 0; }
+
+  .how-card strong { color: var(--ink); }
+
+  /* ---- CTA band ---- */
+
+  .cta-band {
+    background: linear-gradient(150deg, var(--ink) 0%, var(--teal-dark) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 32px;
+  }
+
+  .cta-inner {
+    max-width: 640px;
+  }
+
+  .cta-band h2 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+
+  .cta-band p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(242,250,248,0.8);
+    margin: 0 0 28px 0;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-cta-outline {
+    border: 1px solid rgba(255,255,255,0.35);
+    color: var(--white);
+    background: rgba(255,255,255,0.06);
+    padding: 13px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .btn-cta-outline:hover { background: rgba(255,255,255,0.14); }
+
+  .btn-cta-solid {
+    background: var(--coral);
+    color: var(--white);
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-cta-solid:hover { background: var(--coral-dark); }
+
+  .share-note {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: #ffd9b8;
+    min-height: 18px;
+  }
+
+  /* ---- Footer ---- */
+
+  .site-footer {
+    background: var(--ink);
+    color: rgba(242,250,248,0.65);
+    padding: 48px 32px 24px 32px;
+  }
+
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+  }
+
+  .footer-brand .footer-logo {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .footer-brand .footer-logo span { color: var(--coral); }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(242,250,248,0.6);
+    max-width: 220px;
+    margin: 0;
+  }
+
+  .footer-col h4 {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--white);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-col a {
+    display: block;
+    text-decoration: none;
+    color: rgba(242,250,248,0.65);
+    font-size: 0.85rem;
+    margin-bottom: 9px;
+  }
+
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    max-width: 900px;
+    margin: 36px auto 0 auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: rgba(242,250,248,0.5);
+  }
+
+  @media (max-width: 640px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .field-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.9rem; }
+    .match-head { flex-direction: column; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg class="logo-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="9" fill="#0f766e"/>
+        <path d="M7 24 C 9 16, 14 20, 16 14 C 18 8, 22 12, 24 8"
+          fill="none" stroke="#f2faf8" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="7" cy="24" r="2.4" fill="#f2faf8"/>
+        <circle cx="24" cy="8" r="3" fill="#f97316"/>
+      </svg>
+      Cause<span>Path</span>
+    </div>
+    <div class="nav-tag">🚀 Built for NextStep Hacks 2026</div>
+  </div>
+</div>
+
+<section class="hero">
+  <h1>Find where your skills matter most</h1>
+  <p>Tell CausePath what you're good at and what you care about — it matches you to real volunteer roles that need exactly that, then points you to opportunities near you.</p>
+</section>
+
+<div class="stat-band">
+  <section class="stat-inner">
+    <div class="stat-number">54%</div>
+    <p class="stat-text">of people who want to volunteer say they simply don't know how to get started<br>
+    <span class="stat-source">— Gallup / Kettering Foundation</span></p>
+    <p class="stat-followup">That's the gap CausePath is built to close.</p>
+  </section>
+</div>
+
+<section>
+  <div class="form-wrap">
+    <form id="matchForm">
+      <div class="form-section">
+        <h3><span class="step-num">1</span>What skills can you offer?</h3>
+        <p class="hint">Pick as many as apply.</p>
+        <div class="chip-grid" id="skillsGrid"></div>
+      </div>
+
+      <div class="form-section">
+        <h3><span class="step-num">2</span>What causes do you care about?</h3>
+        <p class="hint">Pick one or more.</p>
+        <div class="chip-grid" id="causesGrid"></div>
+      </div>
+
+      <div class="form-section">
+        <div class="field-row">
+          <div>
+            <h3><span class="step-num">3</span>When are you free?</h3>
+            <div class="radio-row" id="availabilityGrid"></div>
+          </div>
+          <div>
+            <h3>Format</h3>
+            <div class="radio-row" id="formatGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section field">
+        <label class="field-label" for="location">Your city or zip (optional, used only to build a search link — nothing is saved or sent anywhere)</label>
+        <input type="text" id="location" placeholder="e.g. St. Paul, MN">
+      </div>
+
+      <button class="btn-match" type="submit">Find my matches</button>
+      <div class="form-error" id="formError"></div>
+    </form>
+  </div>
+
+  <div class="loading-state" id="loadingState">
+    <div class="spinner"></div>
+    <p>Matching your skills to real causes...</p>
+  </div>
+
+  <div class="results" id="results">
+    <div class="results-head-row">
+      <div>
+        <h2>Your top matches</h2>
+        <p class="results-sub" id="resultsSub"></p>
+      </div>
+      <button class="btn-reset" id="resetBtn" type="button">↺ Start over</button>
+    </div>
+    <div id="matchList"></div>
+  </div>
+</section>
+
+<section class="how-it-works" id="how">
+  <div class="how-card">
+    <h3>About CausePath</h3>
+    <p>CausePath was built for <strong>NextStep Hacks 2026</strong> to tackle a simple but real problem: plenty of people want to volunteer, but don't know where their specific skills and time would actually help. Instead of a generic listings site, CausePath asks about you first, then points to causes that fit.</p>
+  </div>
+  <div class="how-card">
+    <h3>How this works</h3>
+    <p>CausePath scores 26 real volunteer opportunity types against the skills, causes, and availability you select — weighing cause alignment and skill overlap to rank the best fits. It's a transparent, rule-based match: no black-box AI, no hidden scoring you can't reason about.</p>
+    <p><strong>Your privacy:</strong> everything runs in your browser. Nothing you enter — including your city or zip — is stored, saved, or sent to any server. Closing this tab clears it completely.</p>
+  </div>
+</section>
+
+<div class="cta-band">
+  <section class="cta-inner">
+    <h2>Know someone who wants to help but doesn't know where to start?</h2>
+    <p>That's exactly the gap CausePath is built to close. Share it, or take another pass yourself for a different cause.</p>
+    <div class="cta-actions">
+      <a class="btn-cta-outline" href="#how">Learn how it works</a>
+      <button class="btn-cta-solid" id="shareBtn" type="button">Share CausePath</button>
+    </div>
+    <div class="share-note" id="shareNote"></div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg class="logo-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="9" fill="#0f766e"/>
+          <path d="M7 24 C 9 16, 14 20, 16 14 C 18 8, 22 12, 24 8"
+            fill="none" stroke="#f2faf8" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="7" cy="24" r="2.4" fill="#f2faf8"/>
+          <circle cx="24" cy="8" r="3" fill="#f97316"/>
+        </svg>
+        Cause<span>Path</span>
+      </div>
+      <p>Matching willing hands to real need — one skill at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Project</h4>
+      <a href="#how">How it works</a>
+      <a href="#matchForm">Find a match</a>
+    </div>
+    <div class="footer-col">
+      <h4>Causes</h4>
+      <a href="#matchForm">Environment</a>
+      <a href="#matchForm">Education</a>
+      <a href="#matchForm">Animal Welfare</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hackathon</h4>
+      <a href="https://nextstep2026.devpost.com/" target="_blank" rel="noopener">NextStep Hacks 2026</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 CausePath</span>
+    <span>Matches are suggestions, not guaranteed placements — always confirm details with the organization.</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Data: skills, causes, and volunteer opportunity archetypes ----
+
+  const SKILLS = [
+    { id: "teaching", label: "Teaching / Tutoring", icon: "📚" },
+    { id: "cooking", label: "Cooking", icon: "🍳" },
+    { id: "gardening", label: "Gardening", icon: "🌱" },
+    { id: "physical", label: "Physical / Manual Work", icon: "💪" },
+    { id: "admin", label: "Organizing / Admin", icon: "🗂️" },
+    { id: "writing", label: "Writing / Marketing", icon: "✍️" },
+    { id: "tech", label: "Computers / Tech", icon: "💻" },
+    { id: "listening", label: "Listening / Empathy", icon: "👂" },
+    { id: "language", label: "Language / Translation", icon: "🗣️" },
+    { id: "driving", label: "Driving", icon: "🚗" },
+    { id: "eventplanning", label: "Event Planning", icon: "🎪" },
+    { id: "fundraising", label: "Fundraising", icon: "💰" },
+    { id: "art", label: "Art / Creative", icon: "🎨" },
+    { id: "childcare", label: "Childcare", icon: "🧸" },
+    { id: "eldercare", label: "Elder Care Experience", icon: "🤝" },
+    { id: "animalcare", label: "Animal Care", icon: "🐾" },
+    { id: "leadership", label: "Leadership", icon: "🧭" },
+  ];
+
+  const CAUSES = [
+    { id: "environment", label: "Environment", icon: "🌍" },
+    { id: "education", label: "Education", icon: "🎓" },
+    { id: "elderly", label: "Elderly Support", icon: "👵" },
+    { id: "animals", label: "Animal Welfare", icon: "🐶" },
+    { id: "food", label: "Food Security", icon: "🥫" },
+    { id: "homelessness", label: "Homelessness", icon: "🏠" },
+    { id: "youth", label: "Youth Mentoring", icon: "🌟" },
+    { id: "disaster", label: "Disaster Relief", icon: "🚨" },
+    { id: "health", label: "Health & Wellness", icon: "❤️" },
+    { id: "arts", label: "Arts & Culture", icon: "🎭" },
+    { id: "techliteracy", label: "Tech Literacy", icon: "🖥️" },
+    { id: "veterans", label: "Veteran Support", icon: "🎖️" },
+    { id: "housing", label: "Housing", icon: "🏘️" },
+    { id: "mentalhealth", label: "Mental Health", icon: "🧠" },
+  ];
+
+  const AVAILABILITY = [
+    { id: "weekday", label: "Weekdays" },
+    { id: "weekend", label: "Weekends" },
+    { id: "either", label: "Either" },
+  ];
+
+  const FORMAT = [
+    { id: "inperson", label: "In-person" },
+    { id: "remote", label: "Remote" },
+    { id: "either", label: "Either" },
+  ];
+
+  // Each opportunity: skills/causes it values, when it typically runs,
+  // and a search query used to build a real "find near you" link.
+  const OPPORTUNITIES = [
+    {
+      name: "Community Garden Volunteer",
+      category: "environment",
+      skills: ["gardening", "physical", "teaching"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Help grow and maintain shared garden spaces that provide fresh produce to the community.",
+      searchQuery: "community garden volunteer",
+    },
+    {
+      name: "Homework Help / Tutoring",
+      category: "education",
+      skills: ["teaching", "listening", "language"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson", "remote"],
+      description: "Support students one-on-one or in small groups with schoolwork, in person or online.",
+      searchQuery: "tutoring volunteer",
+    },
+    {
+      name: "Senior Companion Visits",
+      category: "elderly",
+      skills: ["listening", "eldercare", "driving"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Spend time with isolated seniors — conversation, errands, or just company.",
+      searchQuery: "senior companion volunteer",
+    },
+    {
+      name: "Animal Shelter Assistant",
+      category: "animals",
+      skills: ["animalcare", "physical", "admin"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Help care for, walk, and socialize animals waiting for adoption.",
+      searchQuery: "animal shelter volunteer",
+    },
+    {
+      name: "Food Bank Sorting & Packing",
+      category: "food",
+      skills: ["physical", "admin", "cooking"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Sort donations and pack food boxes for families facing food insecurity.",
+      searchQuery: "food bank volunteer",
+    },
+    {
+      name: "Shelter Meal Service",
+      category: "homelessness",
+      skills: ["cooking", "physical", "listening"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Prepare and serve meals at a shelter or outreach program.",
+      searchQuery: "homeless shelter meal volunteer",
+    },
+    {
+      name: "Youth Mentor",
+      category: "youth",
+      skills: ["listening", "leadership", "teaching"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson", "remote"],
+      description: "Guide a young person through school, career, or life decisions as a consistent mentor.",
+      searchQuery: "youth mentor volunteer",
+    },
+    {
+      name: "Disaster Relief Support Crew",
+      category: "disaster",
+      skills: ["physical", "admin", "driving", "leadership"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Assist with supply distribution, cleanup, or logistics after local emergencies.",
+      searchQuery: "disaster relief volunteer",
+    },
+    {
+      name: "Hospital or Hospice Support",
+      category: "health",
+      skills: ["listening", "eldercare", "admin"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Provide comfort, companionship, or light administrative help to patients and families.",
+      searchQuery: "hospital volunteer",
+    },
+    {
+      name: "Community Arts Program Helper",
+      category: "arts",
+      skills: ["art", "teaching", "eventplanning"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Help run art classes, exhibitions, or performances for the community.",
+      searchQuery: "community arts volunteer",
+    },
+    {
+      name: "Digital Literacy Coach",
+      category: "techliteracy",
+      skills: ["tech", "teaching", "listening"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson", "remote"],
+      description: "Teach basic computer, smartphone, or internet skills to people who need them.",
+      searchQuery: "digital literacy volunteer",
+    },
+    {
+      name: "Nonprofit Marketing Volunteer",
+      category: "education",
+      skills: ["writing", "art", "tech"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["remote"],
+      description: "Help a nonprofit with social media, flyers, or website content from anywhere.",
+      searchQuery: "nonprofit marketing volunteer remote",
+    },
+    {
+      name: "Fundraising Event Crew",
+      category: "health",
+      skills: ["fundraising", "eventplanning", "admin"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Help plan and run fundraising events like walks, auctions, or drives.",
+      searchQuery: "fundraising event volunteer",
+    },
+    {
+      name: "Translation & Interpretation Helper",
+      category: "education",
+      skills: ["language", "listening", "writing"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson", "remote"],
+      description: "Help translate documents or interpret for people who need language support.",
+      searchQuery: "translation volunteer",
+    },
+    {
+      name: "Childcare During Community Events",
+      category: "youth",
+      skills: ["childcare", "listening", "eventplanning"],
+      availability: ["weekend", "either"],
+      format: ["inperson"],
+      description: "Watch over kids so parents can attend classes, support groups, or events.",
+      searchQuery: "childcare volunteer",
+    },
+    {
+      name: "Environmental Cleanup Crew",
+      category: "environment",
+      skills: ["physical", "leadership", "admin"],
+      availability: ["weekend", "either"],
+      format: ["inperson"],
+      description: "Join organized cleanups of parks, rivers, and public spaces.",
+      searchQuery: "environmental cleanup volunteer",
+    },
+    {
+      name: "Veteran Support Companion",
+      category: "veterans",
+      skills: ["listening", "driving", "eldercare"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Provide companionship, transportation, or errand support to veterans in your community.",
+      searchQuery: "veteran support volunteer",
+    },
+    {
+      name: "Blood Drive Volunteer",
+      category: "health",
+      skills: ["admin", "eventplanning"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson"],
+      description: "Help check in donors, manage supplies, and keep blood drives running smoothly.",
+      searchQuery: "blood drive volunteer",
+    },
+    {
+      name: "Park & Trail Maintenance Crew",
+      category: "environment",
+      skills: ["physical", "leadership", "admin"],
+      availability: ["weekend", "either"],
+      format: ["inperson"],
+      description: "Maintain trails, plant native species, and keep public green spaces usable for everyone.",
+      searchQuery: "park trail maintenance volunteer",
+    },
+    {
+      name: "Reading Buddy",
+      category: "youth",
+      skills: ["teaching", "listening", "childcare"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["inperson", "remote"],
+      description: "Read one-on-one with young kids to build literacy and a love of reading.",
+      searchQuery: "reading buddy volunteer",
+    },
+    {
+      name: "Crisis Text Line Responder",
+      category: "mentalhealth",
+      skills: ["listening", "tech"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["remote"],
+      description: "Provide text-based emotional support to people in crisis, fully remote after training.",
+      searchQuery: "crisis text line volunteer",
+    },
+    {
+      name: "Meals on Wheels Driver",
+      category: "elderly",
+      skills: ["driving", "listening"],
+      availability: ["weekday", "either"],
+      format: ["inperson"],
+      description: "Deliver meals to homebound seniors — often the only visitor they see that day.",
+      searchQuery: "meals on wheels volunteer",
+    },
+    {
+      name: "Home Build Volunteer",
+      category: "housing",
+      skills: ["physical", "leadership", "admin"],
+      availability: ["weekend", "either"],
+      format: ["inperson"],
+      description: "Help construct or repair affordable housing alongside future homeowners.",
+      searchQuery: "habitat for humanity volunteer",
+    },
+    {
+      name: "Conversation Partner for Language Learners",
+      category: "education",
+      skills: ["language", "listening"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["remote", "inperson"],
+      description: "Practice conversational English (or another language) one-on-one with adult learners.",
+      searchQuery: "language conversation partner volunteer",
+    },
+    {
+      name: "Nonprofit Social Media Helper",
+      category: "arts",
+      skills: ["writing", "art", "tech"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["remote"],
+      description: "Create posts, graphics, or short videos to help a small nonprofit reach more people.",
+      searchQuery: "nonprofit social media volunteer remote",
+    },
+    {
+      name: "Animal Foster Coordinator",
+      category: "animals",
+      skills: ["admin", "animalcare", "writing"],
+      availability: ["weekday", "weekend", "either"],
+      format: ["remote", "inperson"],
+      description: "Match foster animals with foster homes and keep records on their care and adoption status.",
+      searchQuery: "animal foster coordinator volunteer",
+    },
+  ];
+
+  // ---- Render form chips ----
+
+  function renderChips(container, items, name, type) {
+    container.innerHTML = items.map(item => `
+      <div class="chip">
+        <input type="${type}" name="${name}" id="${name}_${item.id}" value="${item.id}">
+        <label for="${name}_${item.id}">${item.icon ? item.icon + " " : ""}${item.label}</label>
+      </div>
+    `).join("");
+  }
+
+  renderChips(document.getElementById("skillsGrid"), SKILLS, "skill", "checkbox");
+  renderChips(document.getElementById("causesGrid"), CAUSES, "cause", "checkbox");
+  renderChips(document.getElementById("availabilityGrid"), AVAILABILITY, "availability", "radio");
+  renderChips(document.getElementById("formatGrid"), FORMAT, "format", "radio");
+
+  // Default radio selections
+  document.getElementById("availability_either").checked = true;
+  document.getElementById("format_either").checked = true;
+
+  // ---- Matching logic ----
+
+  function getChecked(name) {
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+  }
+
+  function scoreOpportunity(opp, userSkills, userCauses, availability, format) {
+    let score = 0;
+    let maxScore = 0;
+    const matchedSkills = [];
+
+    // Skill overlap: 2 points per matching skill
+    opp.skills.forEach(s => {
+      maxScore += 2;
+      if (userSkills.includes(s)) {
+        score += 2;
+        matchedSkills.push(s);
+      }
+    });
+
+    // Cause match: 5 points
+    maxScore += 5;
+    const causeMatch = userCauses.includes(opp.category);
+    if (causeMatch) score += 5;
+
+    // Availability compatibility: 2 points
+    maxScore += 2;
+    if (availability === "either" || opp.availability.includes(availability)) score += 2;
+
+    // Format compatibility: 2 points
+    maxScore += 2;
+    if (format === "either" || opp.format.includes(format)) score += 2;
+
+    const percent = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+
+    return { opp, score, percent, matchedSkills, causeMatch };
+  }
+
+  function buildSearchLink(query, location) {
+    const q = location ? `${query} ${location}` : query;
+    return `https://www.google.com/search?q=${encodeURIComponent(q + " volunteer opportunities")}`;
+  }
+
+  function skillLabel(id) {
+    const found = SKILLS.find(s => s.id === id);
+    return found ? found.label : id;
+  }
+
+  function causeLabel(id) {
+    const found = CAUSES.find(c => c.id === id);
+    return found ? found.label : id;
+  }
+
+  function causeIcon(id) {
+    const found = CAUSES.find(c => c.id === id);
+    return found ? found.icon : "✅";
+  }
+
+  function renderResults(matches, location) {
+    const list = document.getElementById("matchList");
+    const resultsSub = document.getElementById("resultsSub");
+
+    if (matches.length === 0) {
+      resultsSub.textContent = "";
+      list.innerHTML = `<div class="no-results">No strong matches found — try selecting a few more skills or causes.</div>`;
+      return;
+    }
+
+    resultsSub.textContent = `Based on what you shared, here are your best-fit volunteer roles.`;
+
+    list.innerHTML = matches.map((m, i) => {
+      const badges = [
+        `<span class="badge">${causeLabel(m.opp.category)}</span>`,
+        ...m.matchedSkills.map(s => `<span class="badge coral">${skillLabel(s)}</span>`)
+      ].join("");
+
+      let why = m.causeMatch
+        ? `Matches your interest in ${causeLabel(m.opp.category).toLowerCase()}`
+        : `A nearby fit even though it's outside your selected causes`;
+      if (m.matchedSkills.length > 0) {
+        why += ` and puts your ${m.matchedSkills.map(skillLabel).join(", ").toLowerCase()} skills to use.`;
+      } else {
+        why += `.`;
+      }
+
+      return `
+        <div class="match-card" style="animation-delay: ${i * 0.08}s">
+          <div class="match-head">
+            <h3>${causeIcon(m.opp.category)} ${m.opp.name}</h3>
+            <span class="match-score">
+              <span class="score-ring">
+                <svg viewBox="0 0 46 46">
+                  <circle class="ring-bg" cx="23" cy="23" r="19"></circle>
+                  <circle class="ring-fill" cx="23" cy="23" r="19"
+                    stroke-dasharray="${2 * Math.PI * 19}"
+                    stroke-dashoffset="${2 * Math.PI * 19 * (1 - m.percent / 100)}"></circle>
+                  <text x="23" y="27" text-anchor="middle">${m.percent}%</text>
+                </svg>
+              </span>
+            </span>
+          </div>
+          <p class="why">${why} ${m.opp.description}</p>
+          <div class="match-badges">${badges}</div>
+          <a class="btn-find" href="${buildSearchLink(m.opp.searchQuery, location)}" target="_blank" rel="noopener">Find this near you →</a>
+        </div>
+      `;
+    }).join("");
+  }
+
+  document.getElementById("matchForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById("formError");
+
+    const userSkills = getChecked("skill");
+    const userCauses = getChecked("cause");
+    const availability = getChecked("availability")[0] || "either";
+    const format = getChecked("format")[0] || "either";
+    const location = document.getElementById("location").value.trim();
+
+    if (userSkills.length === 0 && userCauses.length === 0) {
+      errorEl.textContent = "Pick at least one skill or cause so we have something to match on.";
+      return;
+    }
+    errorEl.textContent = "";
+
+    const resultsEl = document.getElementById("results");
+    const loadingEl = document.getElementById("loadingState");
+
+    resultsEl.classList.remove("visible");
+    loadingEl.classList.add("visible");
+    loadingEl.scrollIntoView({ behavior: "smooth" });
+
+    // Brief pause so the matching feels like it's actually happening —
+    // also gives real breathing room since the calculation itself is instant.
+    setTimeout(() => {
+      const scored = OPPORTUNITIES
+        .map(opp => scoreOpportunity(opp, userSkills, userCauses, availability, format))
+        .filter(m => m.percent > 0)
+        .sort((a, b) => b.percent - a.percent)
+        .slice(0, 5);
+
+      renderResults(scored, location);
+
+      loadingEl.classList.remove("visible");
+      resultsEl.classList.add("visible");
+      resultsEl.scrollIntoView({ behavior: "smooth" });
+    }, 700);
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    document.getElementById("matchForm").reset();
+    document.getElementById("availability_either").checked = true;
+    document.getElementById("format_either").checked = true;
+    document.getElementById("results").classList.remove("visible");
+    document.getElementById("formError").textContent = "";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("shareBtn").addEventListener("click", async () => {
+    const note = document.getElementById("shareNote");
+    const url = window.location.href;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "CausePath", text: "Find where your skills matter most:", url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      note.textContent = "Link copied — paste it anywhere to share.";
+    } catch (err) {
+      note.textContent = url;
+    }
+  });
+</script>
+
+</body>
+</html>
